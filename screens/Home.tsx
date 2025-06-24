@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import CardTask from "../components/CardTask";
 import { useState } from "react";
+import CardTask from "../components/CardTask";
 
 const tarefas = [
   {

@@ -1,21 +1,37 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Feather } from "@expo/vector-icons";
 
-type CardTaskProps = {
+interface CardTaskProps {
   title: string;
   description: string;
-};
+  isSelected: boolean;
+  done: boolean;
+  onSelect: () => void;
+}
 
-export default function CardTask({ title, description }: CardTaskProps) {
+export default function CardTask({
+  title,
+  description,
+  isSelected,
+  done,
+  onSelect,
+}: CardTaskProps) {
   return (
-    <View style={styles.cardTask}>
-      <Text style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
-    </View>
+    <TouchableOpacity>
+      <Feather
+        name={isSelected ? "check-square" : "square"}
+        style={isSelected ? styles.iconDefault : styles.iconDefault}
+      />
+      <View>
+        <Text style={[styles.title, done && styles.done]}>{title}</Text>
+        <Text style={styles.description}>{description}</Text>
+      </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  cardTask: {
+  container: {
     elevation: 2,
     borderRadius: 10,
     backgroundColor: "#fff",
@@ -35,5 +51,17 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 16,
+  },
+  iconSelected: {
+    color: "green",
+    fontSize: 24,
+  },
+  iconDefault: {
+    color: "gray",
+    fontSize: 24,
+  },
+  done: {
+    textDecorationLine: "line-through",
+    color: "gray",
   },
 });
