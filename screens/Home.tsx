@@ -100,6 +100,7 @@ export default function Home({ navigation }: { navigation: any }) {
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         contentContainerStyle={styles.listContent}
+        ItemSeparatorComponent={() => <View style={styles.separator} />}
       />
     </View>
   );
@@ -108,23 +109,26 @@ export default function Home({ navigation }: { navigation: any }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
     backgroundColor: "#fff",
   },
   separator: {
     height: 12,
   },
   defaultHeader: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    paddingTop: 32,
   },
   selectionHeader: {
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    backgroundColor: "#eee",
   },
   headerTitle: {
     fontSize: 24,
@@ -134,8 +138,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   listContent: {
-    flexGrow: 1,
-    paddingTop: 10,
-    paddingBottom: 100,
+    paddingBottom: 40,
   },
 });

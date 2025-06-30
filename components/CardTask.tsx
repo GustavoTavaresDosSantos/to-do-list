@@ -17,7 +17,7 @@ export default function CardTask({
   onSelect,
 }: CardTaskProps) {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onSelect} style={styles.container}>
       <Feather
         name={isSelected ? "check-square" : "square"}
         style={isSelected ? styles.iconDefault : styles.iconDefault}
