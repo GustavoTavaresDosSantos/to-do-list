@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     backgroundColor: "#eee",
+    paddingTop: 32,
   },
   icon: {
     fontSize: 24,
