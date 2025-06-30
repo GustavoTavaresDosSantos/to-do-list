@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Alert } from "react-native";
 
 type AddTaskProps = {
   onAddTask: (taskText: string) => void;
 };
 
-const AddTask: React.FC<AddTaskProps> = ({ onAddTask }) => {
+const AddTask = (props: AddTaskProps) => {
+  const { onAddTask } = props;
+
   const [task, setTask] = useState<string>("");
 
   const handleAddTask = () => {
