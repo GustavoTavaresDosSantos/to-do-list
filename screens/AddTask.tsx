@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { View, TextInput, Button, StyleSheet, Alert } from "react-native";
+import { RouteProp } from "@react-navigation/native";
+import { RootStackParamList } from "../App";
 
-type AddTaskProps = {
-  onAddTask: (taskText: string) => void;
+type AddTaskRouteProp = RouteProp<RootStackParamList, "AddTask">;
+
+type Props = {
+  route: AddTaskRouteProp;
+  navigation: any;
 };
 
-const AddTask = (props: AddTaskProps) => {
-  const { onAddTask } = props;
-
+export default function AddTask({ route, navigation }: Props) {
+  const { onAddTask } = route.params;
   const [task, setTask] = useState<string>("");
 
   const handleAddTask = () => {
@@ -18,8 +22,9 @@ const AddTask = (props: AddTaskProps) => {
       return;
     }
 
-    onAddTask(texto);
+    onAddTask({ title: texto, description: "" });
     setTask("");
+    navigation.goBack();
   };
 
   return (
@@ -33,7 +38,7 @@ const AddTask = (props: AddTaskProps) => {
       <Button title="Adicionar" onPress={handleAddTask} />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -52,5 +57,3 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
 });
-
-export default AddTask;

@@ -9,6 +9,10 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import CardTask from "../components/CardTask";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { RootStackParamList } from "../App";
+
+type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
 interface Tarefa {
   id: string;
@@ -17,7 +21,7 @@ interface Tarefa {
   done: boolean;
 }
 
-export default function Home({ navigation }: { navigation: any }) {
+export default function Home({ navigation }: Props) {
   const [tarefas, setTarefas] = useState<Tarefa[]>([
     {
       id: "1",
@@ -65,6 +69,17 @@ export default function Home({ navigation }: { navigation: any }) {
     setSelecionadas([]);
   }
 
+  type NovaTarefa = { title: string; description: string };
+
+  function adicionarTarefa(nova: NovaTarefa) {
+    const novaTarefa: Tarefa = {
+      id: Math.random().toString(),
+      title: nova.title,
+      description: nova.description,
+      done: false,
+    };
+    setTarefas([...tarefas, novaTarefa]);
+  }
   const renderItem: ListRenderItem<Tarefa> = ({ item }) => (
     <CardTask
       title={item.title}
@@ -72,6 +87,12 @@ export default function Home({ navigation }: { navigation: any }) {
       isSelected={selecionadas.includes(item.id)}
       done={item.done}
       onSelect={() => toggleSelect(item.id)}
+      onPress={() =>
+        navigation.navigate("Details", {
+          title: item.title,
+          description: item.description,
+        })
+      }
     />
   );
 
@@ -79,7 +100,11 @@ export default function Home({ navigation }: { navigation: any }) {
     <View style={styles.container}>
       <View style={styles.defaultHeader}>
         <Text style={styles.headerTitle}>Minhas Tarefas</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("AddTask")}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("AddTask", { onAddTask: adicionarTarefa })
+          }
+        >
           <Feather name="plus" style={styles.icon}></Feather>
         </TouchableOpacity>
       </View>
