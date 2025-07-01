@@ -20,7 +20,6 @@ export default function CardTask({
 }: CardTaskProps) {
   return (
     <View style={styles.container}>
-      {/* Ícone de seleção */}
       <TouchableOpacity onPress={onSelect}>
         <Feather
           name={isSelected ? "check-square" : "square"}
@@ -28,7 +27,6 @@ export default function CardTask({
         />
       </TouchableOpacity>
 
-      {/* Área que leva para detalhes */}
       <TouchableOpacity onPress={onPress} style={styles.textContainer}>
         <Text style={[styles.title, done && styles.done]}>{title}</Text>
         <Text style={styles.description}>{description}</Text>
@@ -42,9 +40,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     padding: 16,
     alignItems: "center",
-    backgroundColor: "#fff",
+    backgroundColor: "rgba(255,255,255,0.1)",
     borderRadius: 10,
-    elevation: 2,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -52,7 +49,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 24,
-    color: "gray",
+    color: "white",
     marginRight: 12,
   },
   textContainer: {
@@ -61,10 +58,11 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "white",
   },
   description: {
     fontSize: 16,
-    color: "#555",
+    color: "white",
   },
   done: {
     textDecorationLine: "line-through",
